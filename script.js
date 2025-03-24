@@ -51,6 +51,23 @@ function getTodoHtml(todo, index) {
     </li>`;
 }
 
+function editTask(index) {
+  let todo = todosJson[index]; // Get the selected task
+
+  let newTaskName = prompt("Edit task name:", todo.name);
+  
+  if (newTaskName !== null) { // Check if user pressed "Cancel"
+    newTaskName = newTaskName.trim();
+    if (newTaskName) { // Ensure input is not empty
+      todosJson[index].name = newTaskName;
+      localStorage.setItem("todos", JSON.stringify(todosJson));
+      showTodos(); // Refresh task list
+    } else {
+      alert("Task name cannot be empty.");
+    }
+  }
+}
+
 // ✅ Add Todo Function
 function addTodo() {
   let taskName = input.value.trim();
